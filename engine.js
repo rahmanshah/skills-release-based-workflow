@@ -314,7 +314,14 @@ Sprite.prototype.setup = function (sprite, props) {
 Sprite.prototype.merge = function (props) {
   if (props) {
     for (var prop in props) {
-      this[prop] = props[prop];
+      if (
+        Object.prototype.hasOwnProperty.call(props, prop) &&
+        prop !== "__proto__" &&
+        prop !== "constructor" &&
+        prop !== "prototype"
+      ) {
+        this[prop] = props[prop];
+      }
     }
   }
 };
